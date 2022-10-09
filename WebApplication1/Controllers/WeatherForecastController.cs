@@ -8,26 +8,23 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Controllers
 {
-    [ApiController]
+
     [Route("[controller]")]
+    [ApiController]
     public class WeatherForecastController : ControllerBase
     {
-       
-
-        private ILoggerManager _logger;
-        public WeatherForecastController(ILoggerManager logger)
+        private readonly IRepositoryManager _repository;
+        public WeatherForecastController(IRepositoryManager repository)
         {
-            _logger = logger;
+            _repository = repository;
         }
-
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            _logger.LogInfo("Here is a Info Message");
-            _logger.LogWarn("Here is a Warning Message");
-            _logger.LogDebug("Here is a Debug Message");
-            _logger.LogError("Here is a Error Message");
+            _repository.Company.ToString();
+            _repository.Employee.ToString();
             return new string[] { "value1", "value2" };
         }
     }
+
 }
